@@ -28,4 +28,5 @@ jobs:
     - env: PACKAGE=ProxSDP
     - env: PACKAGE=SCS
     - env: PACKAGE=SDPA
+    - env: PACKAGE=SDPAFamily
     - env: PACKAGE=Tulip

@@ -12,19 +12,20 @@ addons:
         - liblapack-dev
         - libblas-dev
 script:
-- julia -e 'const SOLVER = ENV["SOLVER"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.add(SOLVER); Pkg.test(SOLVER)'
+- julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'
 jobs:
   include:
-    - env: SOLVER=Cbc
-    - env: SOLVER=CDDLib
-    - env: SOLVER=COSMO
-    - env: SOLVER=CSDP
-    - env: SOLVER=ECOS
-    - env: SOLVER=GLPK
-    - env: SOLVER=Ipopt
-    - env: SOLVER=Juniper
-    - env: SOLVER=OSQP
-    - env: SOLVER=ProxSDP
-    - env: SOLVER=SCS
-    - env: SOLVER=SDPA
-    - env: SOLVER=Tulip
+    - env: PACKAGE=JuMP
+    - env: PACKAGE=Cbc
+    - env: PACKAGE=CDDLib
+    - env: PACKAGE=COSMO
+    - env: PACKAGE=CSDP
+    - env: PACKAGE=ECOS
+    - env: PACKAGE=GLPK
+    - env: PACKAGE=Ipopt
+    - env: PACKAGE=Juniper
+    - env: PACKAGE=OSQP
+    - env: PACKAGE=ProxSDP
+    - env: PACKAGE=SCS
+    - env: PACKAGE=SDPA
+    - env: PACKAGE=Tulip

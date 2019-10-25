@@ -1,0 +1,24 @@
+language: julia
+os:
+    - linux
+julia:
+    - 1.0
+notifications:
+    email: false
+sudo: false
+addons:
+    apt_packages:
+        - gfortran
+        - liblapack-dev
+        - libblas-dev
+jobs:
+  include:
+    - stage: "GLPK"
+      script:
+        - julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.add("GLPK"); Pkg.test("GLPK")'
+    - stage: "CSDP"
+      script:
+        - julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.add("CSDP"); Pkg.test("CSDP")'
+    - stage: "Tulip"
+      script:
+        - julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.add("Tulip"); Pkg.test("Tulip")'

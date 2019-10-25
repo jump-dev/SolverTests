@@ -11,14 +11,10 @@ addons:
         - gfortran
         - liblapack-dev
         - libblas-dev
+script:
+- julia -e 'solver = ENV["SOLVER"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.add(SOLVER); Pkg.test(SOLVER)'
 jobs:
   include:
-    - stage: "GLPK"
-      script:
-        - julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.add("GLPK"); Pkg.test("GLPK")'
-    - stage: "CSDP"
-      script:
-        - julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.add("CSDP"); Pkg.test("CSDP")'
-    - stage: "Tulip"
-      script:
-        - julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.add("Tulip"); Pkg.test("Tulip")'
+    - env: SOLVER=GLPK
+    - env: SOLVER=CSDP
+    - env: SOLVER=Tulip

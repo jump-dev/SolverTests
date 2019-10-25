@@ -12,7 +12,7 @@ addons:
         - liblapack-dev
         - libblas-dev
 script:
-- julia -e 'solver = ENV["SOLVER"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.add(SOLVER); Pkg.test(SOLVER)'
+- julia -e 'const SOLVER = ENV["SOLVER"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.add(SOLVER); Pkg.test(SOLVER)'
 jobs:
   include:
     - env: SOLVER=GLPK

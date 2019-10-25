@@ -15,6 +15,16 @@ script:
 - julia -e 'const SOLVER = ENV["SOLVER"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.add(SOLVER); Pkg.test(SOLVER)'
 jobs:
   include:
-    - env: SOLVER=GLPK
+    - env: SOLVER=Cbc
+    - env: SOLVER=CDDLib
+    - env: SOLVER=COSMO
     - env: SOLVER=CSDP
+    - env: SOLVER=ECOS
+    - env: SOLVER=GLPK
+    - env: SOLVER=Ipopt
+    - env: SOLVER=Juniper
+    - env: SOLVER=OSQP
+    - env: SOLVER=ProxSDP
+    - env: SOLVER=SCS
+    - env: SOLVER=SDPA
     - env: SOLVER=Tulip

@@ -17,6 +17,7 @@ jobs:
   include:
     - env: PACKAGE=JuMP
     - env: PACKAGE=Cbc
+    - env: PACKAGE=Clp
     - env: PACKAGE=CDDLib
     - env: PACKAGE=COSMO
     - env: PACKAGE=CSDP

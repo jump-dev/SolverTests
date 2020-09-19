@@ -16,6 +16,9 @@ script:
 jobs:
   include:
     - env: PACKAGE=JuMP
+    - env: PACKAGE=Convex
+    - env: PACKAGE=SumOfSquares
+    - env: PACKAGE=PolyJuMP
     - env: PACKAGE=Cbc
     - env: PACKAGE=Clp
     - env: PACKAGE=CDDLib

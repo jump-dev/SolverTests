@@ -23,6 +23,7 @@ jobs:
     - env: PACKAGE=Clp
     - env: PACKAGE=CDDLib
     - env: PACKAGE=COSMO
+    - env: PACKAGE=CPLEX
     - env: PACKAGE=CSDP
     - env: PACKAGE=ECOS
     - env: PACKAGE=GLPK

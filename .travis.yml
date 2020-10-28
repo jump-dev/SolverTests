@@ -17,18 +17,20 @@ jobs:
   include:
     - env: PACKAGE=Tulip
     - env: PACKAGE=SCIP
-      apt_packages:
-        - libblas3
-        - libc6
-        - libgcc1
-        - libgfortran4
-        - libgmp10
-        - libgsl23
-        - liblapack3
-        - libquadmath0
-        - libstdc++6
-        - libtbb2
-        - zlib1g
+      addons:
+        apt:
+          packages:
+          - libblas3
+          - libc6
+          - libgcc1
+          - libgfortran4
+          - libgmp10
+          - libgsl23
+          - liblapack3
+          - libquadmath0
+          - libstdc++6
+          - libtbb2
+          - zlib1g
 before_install:
   - export VERSION=7.0.0
   - export DEBFILE=SCIPOptSuite-$VERSION-Linux.deb

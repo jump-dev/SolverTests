@@ -15,22 +15,9 @@ script:
 - julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'
 jobs:
   include:
-    - env: PACKAGE=JuMP
-    - env: PACKAGE=Convex
-    - env: PACKAGE=SumOfSquares
-    - env: PACKAGE=PolyJuMP
-    - env: PACKAGE=Cbc
-    - env: PACKAGE=Clp
-    - env: PACKAGE=CDDLib
-    - env: PACKAGE=COSMO
-    - env: PACKAGE=CSDP
-    - env: PACKAGE=ECOS
-    - env: PACKAGE=GLPK
-    - env: PACKAGE=Ipopt
-    - env: PACKAGE=Juniper
-    - env: PACKAGE=OSQP
-    - env: PACKAGE=ProxSDP
-    - env: PACKAGE=SCS
-    - env: PACKAGE=SDPA
-    - env: PACKAGE=SDPAFamily
     - env: PACKAGE=Tulip
+    - env: PACKAGE=MosekTools
+before-install:
+  - if [[ $PACKAGE == "MosekTools" ]]; then
+      sudo apt-get install curl;
+    fi;

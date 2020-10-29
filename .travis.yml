@@ -15,7 +15,25 @@ script:
 - julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'
 jobs:
   include:
-    - env: PACKAGE=Tulip
+    - env: PACKAGE=JuMP
+    - env: PACKAGE=Convex
+    - env: PACKAGE=SumOfSquares
+    - env: PACKAGE=PolyJuMP
+    - env: PACKAGE=Alpine
+    - env: PACKAGE=Cbc
+    - env: PACKAGE=Clp
+    - env: PACKAGE=CDDLib
+    - env: PACKAGE=COSMO
+    - env: PACKAGE=CSDP
+    - env: PACKAGE=ECOS
+    - env: PACKAGE=GLPK
+    - env: PACKAGE=Hypatia
+    - env: PACKAGE=Ipopt
+    - env: PACKAGE=Juniper
+    - env: PACKAGE=NLopt
+    - env: PACKAGE=OSQP
+    - env: PACKAGE=Pavito
+    - env: PACKAGE=ProxSDP
     - env: PACKAGE=SCIP
       dist: bionic
       sudo: true
@@ -33,8 +51,14 @@ jobs:
           - libstdc++6
           - libtbb2
           - zlib1g
+    - env: PACKAGE=SCS
+    - env: PACKAGE=SDPA
+    - env: PACKAGE=SDPAFamily
+    - env: PACKAGE=Tulip
 before_install:
-  - export VERSION=7.0.0
-  - export DEBFILE=SCIPOptSuite-$VERSION-Linux.deb
-  - if [ "$PACKAGE" = "SCIP" ]; then wget --no-check-certificate https://scip.zib.de/download/release/$DEBFILE; fi
-  - if [ "$PACKAGE" = "SCIP" ]; then sudo dpkg -i $DEBFILE ; fi
+  - if [ "$PACKAGE" = "SCIP" ]; then
+      export VERSION=7.0.0;
+      export DEBFILE=SCIPOptSuite-$VERSION-Linux.deb;
+      wget --no-check-certificate https://scip.zib.de/download/release/$DEBFILE;
+      sudo dpkg -i $DEBFILE ;
+    fi

@@ -27,6 +27,7 @@ jobs:
     - env: PACKAGE=CSDP
     - env: PACKAGE=ECOS
     - env: PACKAGE=GLPK
+    - env: PACKAGE=Hypatia
     - env: PACKAGE=Ipopt
     - env: PACKAGE=Juniper
     - env: PACKAGE=NLopt

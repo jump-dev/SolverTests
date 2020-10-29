@@ -19,6 +19,7 @@ jobs:
     - env: PACKAGE=Convex
     - env: PACKAGE=SumOfSquares
     - env: PACKAGE=PolyJuMP
+    - env: PACKAGE=Alpine
     - env: PACKAGE=Cbc
     - env: PACKAGE=Clp
     - env: PACKAGE=CDDLib

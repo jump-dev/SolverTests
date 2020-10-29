@@ -30,6 +30,7 @@ jobs:
     - env: PACKAGE=Hypatia
     - env: PACKAGE=Ipopt
     - env: PACKAGE=Juniper
+    - env: PACKAGE=MosekTools
     - env: PACKAGE=NLopt
     - env: PACKAGE=OSQP
     - env: PACKAGE=Pavito
@@ -38,3 +39,7 @@ jobs:
     - env: PACKAGE=SDPA
     - env: PACKAGE=SDPAFamily
     - env: PACKAGE=Tulip
+before-install:
+  - if [[ $PACKAGE == "MosekTools" ]]; then
+      sudo apt-get install curl;
+    fi;

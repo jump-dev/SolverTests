@@ -17,6 +17,8 @@ jobs:
   include:
     - env: PACKAGE=Tulip
     - env: PACKAGE=SCIP
+      dist: bionic
+      sudo: true
       addons:
         apt:
           packages:

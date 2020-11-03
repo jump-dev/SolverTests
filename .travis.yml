@@ -25,6 +25,7 @@ jobs:
     - env: PACKAGE=CDDLib
     - env: PACKAGE=COSMO
     - env: PACKAGE=CSDP
+    - env: PACKAGE=EAGO # require gfortran
     - env: PACKAGE=ECOS
     - env: PACKAGE=GLPK
     - env: PACKAGE=Hypatia

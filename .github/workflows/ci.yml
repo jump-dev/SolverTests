@@ -38,6 +38,11 @@ jobs:
           - package: 'Pavito'
           - package: 'ProxSDP'
           - package: 'SCIP'
+          - package: 'SCS'
+          - package: 'SDPA'
+          - package: 'SDPAFamily'
+          - package: 'Tulip'
+          - package: 'Xpress'
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1

@@ -1,0 +1,47 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+      - release-*
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  test:
+    name: ${{ matrix.package }}
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE: ${{ matrix.package }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: 'JuMP'
+          - package: 'Convex'
+          - package: 'SumOfSquares'
+          - package: 'PolyJuMP'
+          - package: 'Alpine'
+          - package: 'Cbc'
+          - package: 'Clp'
+          - package: 'CDDLib'
+          - package: 'COSMO'
+          - package: 'CSDP'
+          - package: 'EAGO' # require gfortran
+          - package: 'ECOS'
+          - package: 'GLPK'
+          - package: 'Hypatia'
+          - package: 'Ipopt'
+          - package: 'Juniper'
+          - package: 'MosekTools'
+          - package: 'NLopt'
+          - package: 'OSQP'
+          - package: 'Pavito'
+          - package: 'ProxSDP'
+          - package: 'SCIP'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1'
+      - name: Test
+        run: julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'

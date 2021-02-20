@@ -57,6 +57,9 @@ jobs:
     runs-on: windows-latest
     env:
       PACKAGE: ${{ matrix.package }}
+      SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
+      SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
+      SECRET_XPRA_WIN_8110: ${{ secrets.XPRA_WIN_8110 }}
     strategy:
       fail-fast: false
       matrix:
@@ -68,8 +71,4 @@ jobs:
         with:
           version: '1'
       - name: Test Xpress
-        env:
-          SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
-          SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
-          SECRET_XPRA_WIN_8110: ${{ secrets.XPRA_WIN_8110 }}
         run: julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'

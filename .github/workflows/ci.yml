@@ -52,4 +52,8 @@ jobs:
         with:
           version: '1'
       - name: Test
+        env:
+          SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }} # required for Xpress tests
+          SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
+          SECRET_XPRA_WIN_8110: ${{ secrets.XPRA_WIN_8110 }}
         run: julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'

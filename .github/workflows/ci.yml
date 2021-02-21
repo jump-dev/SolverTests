@@ -67,4 +67,4 @@ jobs:
           SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
           SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
           SECRET_XPRA_WIN_8110: ${{ secrets.XPRA_WIN_8110 }}
-        run: julia -e "using Pkg; Pkg.develop(\"MathOptInterface\"); Pkg.develop(\"Xpress\"); Pkg.test(\"Xpress\")"
+        run: julia -e 'using Pkg; Pkg.develop(\"MathOptInterface\"); Pkg.develop(\"Xpress\"); Pkg.test(\"Xpress\")'

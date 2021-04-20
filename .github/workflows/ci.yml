@@ -1,5 +1,6 @@
 name: CI
 on:
+  workflow_dispatch # allows to trigger it manually
   push:
     branches:
       - master

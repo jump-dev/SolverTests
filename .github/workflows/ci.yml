@@ -39,6 +39,7 @@ jobs:
           - package: 'MosekTools'
           - package: 'NLopt'
           - package: 'OSQP'
+          - package: 'PATHSolver'
           - package: 'Pavito'
           - package: 'ProxSDP'
           - package: 'SCIP'

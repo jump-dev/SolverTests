@@ -29,6 +29,7 @@ jobs:
           - package: 'CDDLib'
           - package: 'COSMO'
           - package: 'CSDP'
+          - package: 'DSDP'
           - package: 'EAGO' # require gfortran
           - package: 'ECOS'
           - package: 'GLPK'

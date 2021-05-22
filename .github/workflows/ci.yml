@@ -54,7 +54,7 @@ jobs:
         with:
           version: '1'
       - name: Test
-        run: julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'
+        run: julia -e 'const PACKAGE = ENV["PACKAGE"]; using Pkg; Pkg.add(PackageSpec(name="MathOptInterface", rev="release-0.9")); Pkg.develop(PACKAGE); Pkg.test(PACKAGE)'
   test_xpress:
     name: Xpress
     runs-on: windows-latest
@@ -70,7 +70,7 @@ jobs:
           SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
           SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
           SECRET_XPRA_WIN_8110: ${{ secrets.XPRA_WIN_8110 }}
-        run: julia -e 'using Pkg; Pkg.develop(\"MathOptInterface\"); Pkg.develop(\"Xpress\"); Pkg.test(\"Xpress\")'
+        run: julia -e 'using Pkg; Pkg.add(PackageSpec(name="MathOptInterface", rev="release-0.9")); Pkg.develop(\"Xpress\"); Pkg.test(\"Xpress\")'
   test_cplex:
     name: CPLEX
     runs-on: ubuntu-latest
@@ -84,4 +84,4 @@ jobs:
           CPLEX_VERSION: '2010'
           SECRET_CPLEX_URL_12100: ${{ secrets.SECRET_CPLEX_URL_12100 }}
           SECRET_CPLEX_URL_2010: ${{ secrets.SECRET_CPLEX_URL_2010 }}
-        run: julia -e 'using Pkg; Pkg.develop("MathOptInterface"); Pkg.develop("CPLEX"); Pkg.test("CPLEX")'
+        run: julia -e 'using Pkg; Pkg.add(PackageSpec(name="MathOptInterface", rev="release-0.9")); Pkg.develop("CPLEX"); Pkg.test("CPLEX")'

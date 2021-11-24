@@ -70,7 +70,7 @@ jobs:
           SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
           SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
           SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
-        run: julia -e 'using Pkg; Pkg.add(PackageSpec(name="MathOptInterface", rev="master")); Pkg.develop(\"Xpress\"); Pkg.test(\"Xpress\")'
+        run: julia -e 'using Pkg; Pkg.add(PackageSpec(name=\"MathOptInterface\", rev=\"master\")); Pkg.develop(\"Xpress\"); Pkg.test(\"Xpress\")'
   test_cplex:
     name: CPLEX
     runs-on: ubuntu-latest

@@ -64,6 +64,9 @@ jobs:
           Pkg.test(ENV["PACKAGE"])
   test_xpress:
     name: Xpress
+    env:
+      # To test on a PR, make a PR to update this environment variable.
+      BRANCH: 'od/bridge-tests's
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -85,6 +88,9 @@ jobs:
           Pkg.test("Xpress")
   test_cplex:
     name: CPLEX
+    env:
+      # To test on a PR, make a PR to update this environment variable.
+      BRANCH: 'od/bridge-tests'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

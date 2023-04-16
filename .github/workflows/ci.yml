@@ -1,21 +1,15 @@
-name: CI
+name: solver-tests
 on:
-  workflow_dispatch: # allows to trigger it manually
-    branches:
-      - master
-  push:
-    branches:
-      - master
-      - release-*
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
+env:
+  BRANCH: 'master'
 jobs:
   test:
     name: ${{ matrix.package }}
     runs-on: ubuntu-latest
     env:
-      # To test on a PR, make a PR to update this environment variable.
-      BRANCH: 'master'
       PACKAGE: ${{ matrix.package }}
     strategy:
       fail-fast: false
@@ -30,9 +24,10 @@ jobs:
           - package: 'Clp'
           - package: 'CDDLib'
           - package: 'COSMO'
+          - package: 'CPLEX'
           - package: 'CSDP'
           - package: 'DSDP'
-          - package: 'EAGO' # require gfortran
+          - package: 'EAGO'
           - package: 'ECOS'
           - package: 'GLPK'
           - package: 'HiGHS'
@@ -50,59 +45,21 @@ jobs:
           - package: 'SDPA'
           - package: 'SDPAFamily'
           - package: 'Tulip'
+          - package: 'Xpress'
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
         with:
           version: '1'
+      - uses: julia-actions/julia-buildpkg@v1
       - name: Test
         shell: julia --color=yes {0}
+        env:
+          SECRET_XPRA_WIN_8130: "${{ matrix.package == 'Xpress' ? ${{ secrets.XPRA_WIN_8130 }} : ''}}"
+          CPLEX_VERSION: '2010'
+          SECRET_CPLEX_URL_12100: "${{ matrix.package == 'CPLEX' ? ${{ secrets.SECRET_CPLEX_URL_12100 }} : ''}}"
         run: |
           import Pkg
           Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
           Pkg.develop(ENV["PACKAGE"])
           Pkg.test(ENV["PACKAGE"])
-  test_xpress:
-    name: Xpress
-    runs-on: windows-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v2
-      - uses: julia-actions/setup-julia@v1
-        with:
-          version: '1'
-      - name: Test Xpress
-        env:
-          # To test on a PR, make a PR to update this environment variable.
-          BRANCH: 'master'
-          SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
-          SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
-          SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
-        shell: julia --color=yes {0}
-        run: |
-          import Pkg
-          Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
-          Pkg.develop("Xpress")
-          Pkg.test("Xpress")
-  test_cplex:
-    name: CPLEX
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: julia-actions/setup-julia@v1
-        with:
-          version: '1'
-      - name: Test CPLEX
-        env:
-          # To test on a PR, make a PR to update this environment variable.
-          BRANCH: 'master'
-          CPLEX_VERSION: '2010'
-          SECRET_CPLEX_URL_12100: ${{ secrets.SECRET_CPLEX_URL_12100 }}
-          SECRET_CPLEX_URL_2010: ${{ secrets.SECRET_CPLEX_URL_2010 }}
-        shell: julia --color=yes {0}
-        run: |
-          import Pkg
-          Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
-          Pkg.develop("CPLEX")
-          Pkg.test("CPLEX")

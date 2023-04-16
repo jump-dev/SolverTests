@@ -55,9 +55,9 @@ jobs:
       - name: Test
         shell: julia --color=yes {0}
         env:
-          SECRET_XPRA_WIN_8130: "${{ matrix.package == 'Xpress' ? ${{ secrets.XPRA_WIN_8130 }} : ''}}"
           CPLEX_VERSION: '2010'
-          SECRET_CPLEX_URL_12100: "${{ matrix.package == 'CPLEX' ? ${{ secrets.SECRET_CPLEX_URL_12100 }} : ''}}"
+          SECRET_CPLEX_URL_12100: ${{ secrets.SECRET_CPLEX_URL_12100 }}
+          SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
         run: |
           import Pkg
           Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))

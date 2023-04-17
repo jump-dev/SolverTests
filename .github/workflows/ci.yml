@@ -8,43 +8,46 @@ env:
 jobs:
   test:
     name: ${{ matrix.package }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform }}
     env:
       PACKAGE: ${{ matrix.package }}
     strategy:
       fail-fast: false
       matrix:
+        platform: [ubuntu-latest]
         include:
-          - package: 'JuMP'
-          - package: 'Convex'
-          - package: 'SumOfSquares'
-          - package: 'PolyJuMP'
-          - package: 'Alpine'
-          - package: 'Cbc'
-          - package: 'Clp'
-          - package: 'CDDLib'
-          - package: 'COSMO'
-          - package: 'CPLEX'
-          - package: 'CSDP'
-          - package: 'DSDP'
-          - package: 'EAGO'
-          - package: 'ECOS'
-          - package: 'GLPK'
-          - package: 'HiGHS'
-          - package: 'Hypatia'
-          - package: 'Ipopt'
-          - package: 'Juniper'
-          - package: 'MosekTools'
-          - package: 'NLopt'
-          - package: 'OSQP'
-          - package: 'PATHSolver'
-          - package: 'Pavito'
-          - package: 'ProxSDP'
-          - package: 'SCIP'
-          - package: 'SCS'
-          - package: 'SDPA'
-          - package: 'SDPAFamily'
-          - package: 'Tulip'
+          - package: JuMP
+          - package: Convex
+          - package: SumOfSquares
+          - package: PolyJuMP
+          - package: Alpine
+          - package: Cbc
+          - package: Clp
+          # - package: CDDLib
+          - package: COSMO
+          - package: CPLEX
+          - package: CSDP
+          # - package: DSDP
+          # - package: EAGO
+          - package: ECOS
+          - package: GLPK
+          - package: HiGHS
+          - package: Hypatia
+          - package: Ipopt
+          - package: Juniper
+          - package: MosekTools
+          - package: NLopt
+          - package: OSQP
+          - package: PATHSolver
+          - package: Pavito
+          - package: ProxSDP
+          - package: SCIP
+          - package: SCS
+          - package: SDPA
+          # - package: SDPAFamily
+          # - package: Tulip
+          - package: Xpress
+            platform: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
@@ -55,27 +58,11 @@ jobs:
         env:
           CPLEX_VERSION: '2010'
           SECRET_CPLEX_URL_2010: ${{ secrets.SECRET_CPLEX_URL_2010 }}
+          SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
+          SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
+          SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
         run: |
           import Pkg
           Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
           Pkg.develop(ENV["PACKAGE"])
           Pkg.test(ENV["PACKAGE"])
-  test_xpress:
-    name: Xpress
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: julia-actions/setup-julia@v1
-        with:
-          version: '1'
-      - name: Test Xpress
-        env:
-          SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
-          SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
-          SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
-        shell: julia --color=yes {0}
-        run: |
-          import Pkg
-          Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
-          Pkg.develop("Xpress")
-          Pkg.test("Xpress")

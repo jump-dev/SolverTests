@@ -50,7 +50,6 @@ jobs:
       - uses: julia-actions/setup-julia@v1
         with:
           version: '1'
-      - uses: julia-actions/julia-buildpkg@v1
       - name: Test
         shell: julia --color=yes {0}
         env:

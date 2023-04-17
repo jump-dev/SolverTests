@@ -7,16 +7,16 @@ env:
   BRANCH: 'master'
 jobs:
   test:
-    name: ${{ matrix.package }} -- ${{ matrix.platform }}
-    runs-on: ${{ matrix.platform }}
+    name: ${{  matrix.package }} -- ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
     env:
       PACKAGE: ${{ matrix.package }}
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest]
+        os: ubuntu-latest
+        package: JuMP
         include:
-          - package: JuMP
           - package: Convex
           - package: SumOfSquares
           - package: PolyJuMP
@@ -47,7 +47,7 @@ jobs:
           - package: SDPAFamily
           - package: Tulip
           - package: Xpress
-            platform: windows-latest
+            os: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1

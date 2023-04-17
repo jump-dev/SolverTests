@@ -7,7 +7,7 @@ env:
   BRANCH: 'master'
 jobs:
   test:
-    name: ${{ matrix.package }}
+    name: ${{ matrix.package }} -- ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     env:
       PACKAGE: ${{ matrix.package }}
@@ -23,12 +23,12 @@ jobs:
           - package: Alpine
           - package: Cbc
           - package: Clp
-          # - package: CDDLib
+          - package: CDDLib
           - package: COSMO
           - package: CPLEX
           - package: CSDP
-          # - package: DSDP
-          # - package: EAGO
+          - package: DSDP
+          - package: EAGO
           - package: ECOS
           - package: GLPK
           - package: HiGHS
@@ -44,8 +44,8 @@ jobs:
           - package: SCIP
           - package: SCS
           - package: SDPA
-          # - package: SDPAFamily
-          # - package: Tulip
+          - package: SDPAFamily
+          - package: Tulip
           - package: Xpress
             platform: windows-latest
     steps:

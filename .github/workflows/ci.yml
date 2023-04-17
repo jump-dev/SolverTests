@@ -45,7 +45,6 @@ jobs:
           - package: 'SDPA'
           - package: 'SDPAFamily'
           - package: 'Tulip'
-          - package: 'Xpress'
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
@@ -57,9 +56,27 @@ jobs:
         env:
           CPLEX_VERSION: '2010'
           SECRET_CPLEX_URL_2010: ${{ secrets.SECRET_CPLEX_URL_2010 }}
-          SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
         run: |
           import Pkg
           Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
           Pkg.develop(ENV["PACKAGE"])
           Pkg.test(ENV["PACKAGE"])
+  test_xpress:
+    name: Xpress
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1'
+      - name: Test Xpress
+        env:
+          SECRET_XPRS_WIN_8110: ${{ secrets.XPRS_WIN_8110 }}
+          SECRET_XPRL_WIN_8110: ${{ secrets.XPRL_WIN_8110 }}
+          SECRET_XPRA_WIN_8130: ${{ secrets.XPRA_WIN_8130 }}
+        shell: julia --color=yes {0}
+        run: |
+          import Pkg
+          Pkg.add(Pkg.PackageSpec(; name="MathOptInterface", rev=ENV["BRANCH"]))
+          Pkg.develop("Xpress")
+          Pkg.test("Xpress")

@@ -14,8 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ubuntu-latest
-        package: JuMP
+        os: [ubuntu-latest]
+        package: [JuMP]
         include:
           - package: Convex
           - package: SumOfSquares

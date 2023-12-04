@@ -1,3 +1,5 @@
+**This repo is archived and no longer used. The actions have been integrated into JuMP and MathOptInterface.**
+
 # Solver tests for MOI
 
 This packages is used to tests solver implemented the [MathOptInterface](https://github.com/JuliaOpt/MathOptInterface.jl).
